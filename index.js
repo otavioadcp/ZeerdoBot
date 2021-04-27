@@ -3,17 +3,9 @@ require("ffmpeg-static");
 const Discord = require("discord.js");
 const { execute, stop, skip } = require("./src/commands");
 const http = require("http");
-http
-  .createServer((req, res) => {
-    res.writeHead(200, {
-      "Content-type": "text/plain",
-    });
-    res.write("Hey");
-    res.end();
-  })
-  .listen(process.env.PORT || 3000, () => {
-    console.log("I'm Ready!");
-  });
+http.listen(process.env.PORT || 3000, () => {
+  console.log("I'm Ready!");
+});
 
 console.log("Rodando o BOTZÂO da massa!");
 
@@ -22,6 +14,10 @@ const client = new Discord.Client({
 });
 
 const prefix = "@";
+
+client.on("ready", () => {
+  console.log("The bot is ready");
+});
 
 client.on("message", async (message) => {
   if (message.author.bot) return;
