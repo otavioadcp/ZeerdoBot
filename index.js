@@ -1,17 +1,6 @@
+require("dotenv").config();
 const Discord = require("discord.js");
-const config = require("./config.json");
 const { execute, stop, skip } = require("./src/commands");
-const http = require("http");
-
-http
-  .createServer((req, res) => {
-    res.writeHead(200, {
-      "Content-type": "text/plain",
-    });
-    res.write("Running");
-    res.end();
-  })
-  .listen(4000);
 
 console.log("Rodando o BOTZÂO da massa!");
 
@@ -61,5 +50,4 @@ client.on("message", async (message) => {
     return;
   }
 });
-
 client.login(process.env.BOT_TOKEN);
