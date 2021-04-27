@@ -1,4 +1,5 @@
 require("dotenv").config();
+require("ffmpeg-static");
 const Discord = require("discord.js");
 const { execute, stop, skip } = require("./src/commands");
 
