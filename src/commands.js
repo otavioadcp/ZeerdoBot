@@ -1,6 +1,22 @@
 const ytdl = require("ytdl-core");
 const songList = new Map();
 
+const DEFAULT_HEADERS = {
+  ["User-Agent"]: getFirefoxUserAgent(),
+  ["Accept-Language"]: "en-US,en;q=0.5",
+};
+
+// keep user agent up to date with some magic
+
+function getFirefoxUserAgent() {
+  let date = new Date();
+  let version =
+    (date.getFullYear() - 2018) * 4 +
+    Math.floor(date.getMonth() / 4) +
+    58 +
+    ".0";
+  return `Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:${version} Gecko/20100101 Firefox/${version}`;
+}
 async function execute(message, url) {
   const serverQueue = songList.get(message.guild.id);
 
@@ -16,7 +32,13 @@ async function execute(message, url) {
     );
   }
 
-  const songInfo = await ytdl.getInfo(url);
+  const songInfo = await ytdl.getInfo(url, {
+    requestOptions: {
+      headers: {
+        ...DEFAULT_HEADERS,
+      },
+    },
+  });
   const song = {
     title: songInfo.videoDetails.title,
     url: songInfo.videoDetails.video_url,
