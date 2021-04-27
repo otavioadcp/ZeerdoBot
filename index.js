@@ -4,7 +4,9 @@ const { execute, stop, skip } = require("./src/commands");
 
 console.log("Rodando o BOTZÂO da massa!");
 
-const client = new Discord.Client();
+const client = new Discord.Client({
+  partials: ["MESSAGE"],
+});
 
 const prefix = "@";
 
