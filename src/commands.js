@@ -39,6 +39,7 @@ async function execute(message, url) {
       },
     },
   });
+
   const song = {
     title: songInfo.videoDetails.title,
     url: songInfo.videoDetails.video_url,
